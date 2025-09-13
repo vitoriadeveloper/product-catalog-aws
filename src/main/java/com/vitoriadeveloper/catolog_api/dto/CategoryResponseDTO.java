@@ -7,7 +7,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-public class CategoryResponse {
+public class CategoryResponseDTO {
     private String id;
     private String titulo;
     private String descricao;

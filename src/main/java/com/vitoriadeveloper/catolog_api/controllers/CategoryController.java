@@ -3,7 +3,7 @@ package com.vitoriadeveloper.catolog_api.controllers;
 import com.vitoriadeveloper.catolog_api.domain.Category;
 import com.vitoriadeveloper.catolog_api.domain.exceptions.CategoryNotFoundException;
 import com.vitoriadeveloper.catolog_api.dto.CategoryRequestDTO;
-import com.vitoriadeveloper.catolog_api.dto.CategoryResponse;
+import com.vitoriadeveloper.catolog_api.dto.CategoryResponseDTO;
 import com.vitoriadeveloper.catolog_api.mappers.CategoryMapper;
 import com.vitoriadeveloper.catolog_api.services.CategoryService;
 import jakarta.validation.Valid;
@@ -26,8 +26,8 @@ public class CategoryController {
     }
 
     @GetMapping
-    public ResponseEntity<List<CategoryResponse>> listAllCategories() {
-        List<CategoryResponse> list = service.list()
+    public ResponseEntity<List<CategoryResponseDTO>> listAllCategories() {
+        List<CategoryResponseDTO> list = service.list()
                 .stream()
                 .map(mapper::toDto)
                 .collect(Collectors.toList());
@@ -35,7 +35,7 @@ public class CategoryController {
     }
 
     @PostMapping
-    public ResponseEntity<CategoryResponse> insertCategory(@Valid @RequestBody CategoryRequestDTO request) {
+    public ResponseEntity<CategoryResponseDTO> insertCategory(@Valid @RequestBody CategoryRequestDTO request) {
         Category category = mapper.toEntity(request);
         Category created = service.create(category);
         return ResponseEntity
@@ -44,7 +44,7 @@ public class CategoryController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<CategoryResponse> updateCategory(@PathVariable String id, @Valid CategoryRequestDTO request) {
+    public ResponseEntity<CategoryResponseDTO> updateCategory(@PathVariable String id, @Valid CategoryRequestDTO request) {
         Category category = mapper.toEntity(request);
 
         Category updated = service.update(category, id).orElseThrow(() -> new CategoryNotFoundException(id));

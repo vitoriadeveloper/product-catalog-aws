@@ -2,7 +2,7 @@ package com.vitoriadeveloper.catolog_api.mappers;
 
 import com.vitoriadeveloper.catolog_api.domain.Category;
 import com.vitoriadeveloper.catolog_api.dto.CategoryRequestDTO;
-import com.vitoriadeveloper.catolog_api.dto.CategoryResponse;
+import com.vitoriadeveloper.catolog_api.dto.CategoryResponseDTO;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
@@ -18,5 +18,5 @@ public interface CategoryMapper {
     // mapping response
     @Mapping(source = "title", target = "titulo")
     @Mapping(source = "description", target = "descricao")
-    CategoryResponse toDto(Category entity);
+    CategoryResponseDTO toDto(Category entity);
 }
