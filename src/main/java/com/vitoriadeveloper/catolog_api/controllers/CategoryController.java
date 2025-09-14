@@ -44,7 +44,7 @@ public class CategoryController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<CategoryResponseDTO> updateCategory(@PathVariable String id, @Valid CategoryRequestDTO request) {
+    public ResponseEntity<CategoryResponseDTO> updateCategory(@PathVariable String id, @Valid @RequestBody CategoryRequestDTO request) {
         Category category = mapper.toEntity(request);
 
         Category updated = service.update(category, id).orElseThrow(() -> new CategoryNotFoundException(id));
