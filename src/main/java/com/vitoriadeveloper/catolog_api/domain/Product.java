@@ -1,6 +1,7 @@
 package com.vitoriadeveloper.catolog_api.domain;
 
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -21,7 +22,7 @@ public class Product {
     @NotBlank(message = "O restaurante dono é obrigatório")
     private String owner;
 
-    @NotBlank(message = "O preço é obrigatório para o produto")
+    @NotNull(message = "O preço é obrigatório para o produto")
     private Double price;
 
     @NotBlank(message = "A descrição do produto é obrigatória")
