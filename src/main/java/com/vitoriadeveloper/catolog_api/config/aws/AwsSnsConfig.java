@@ -8,6 +8,7 @@ import software.amazon.awssdk.auth.credentials.StaticCredentialsProvider;
 import software.amazon.awssdk.regions.Region;
 import software.amazon.awssdk.services.sns.SnsClient;
 
+
 public class AwsSnsConfig {
 
     @Configuration
@@ -33,6 +34,9 @@ public class AwsSnsConfig {
                     ).build();
         }
 
+        @Bean(value = "catalogTopic")
+        public String catalogTopicArn() {
+            return catalogTopic;
+        }
     }
-
 }
