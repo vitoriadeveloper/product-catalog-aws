@@ -15,5 +15,5 @@ public class ProductResponseDTO {
     private Double preco;
     private String descricao;
 
-    private CategoryResponseDTO categoria;
+    private CategoryResponseDTO category;
 }

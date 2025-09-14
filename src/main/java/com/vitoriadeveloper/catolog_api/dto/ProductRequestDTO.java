@@ -14,5 +14,5 @@ public class ProductRequestDTO {
     private Double preco;
     private String descricao;
 
-    private CategoryRequestDTO categoria;
+    private String categoriaId;
 }
