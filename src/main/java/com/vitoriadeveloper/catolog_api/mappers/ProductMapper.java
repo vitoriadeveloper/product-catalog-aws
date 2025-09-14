@@ -15,7 +15,6 @@ public interface ProductMapper {
     @Mapping(source = "dono", target = "owner")
     @Mapping(source = "preco", target = "price")
     @Mapping(source = "descricao", target = "description")
-    @Mapping(source = "descricao", target = "description")
     @Mapping(source = "categoria", target = "category")
     Product toEntity(ProductRequestDTO dto);
 
