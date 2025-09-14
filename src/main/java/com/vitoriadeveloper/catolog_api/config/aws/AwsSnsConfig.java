@@ -9,9 +9,8 @@ import software.amazon.awssdk.regions.Region;
 import software.amazon.awssdk.services.sns.SnsClient;
 
 
+@Configuration
 public class AwsSnsConfig {
-
-    @Configuration
     public class AWSSNSConfig {
         @Value("${aws.region}")
         private String region;
