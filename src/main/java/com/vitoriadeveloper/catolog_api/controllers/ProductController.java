@@ -44,7 +44,7 @@ public class ProductController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<ProductResponseDTO> updateProduct(@PathVariable String id, @Valid ProductRequestDTO request) {
+    public ResponseEntity<ProductResponseDTO> updateProduct(@PathVariable String id, @Valid @RequestBody ProductRequestDTO request) {
         Product updated = service.update(request, id).orElseThrow(() -> new ProductNotFoundException(id));
         return ResponseEntity.ok(mapper.toDto(updated));
     }
