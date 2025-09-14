@@ -1,5 +1,12 @@
 package com.vitoriadeveloper.catolog_api.dto;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@Getter
+@Setter
+@NoArgsConstructor
 public class ProductResponseDTO {
     private String id;
 
@@ -8,5 +15,5 @@ public class ProductResponseDTO {
     private Double preco;
     private String descricao;
 
-    private CategoryResponseDTO category;
+    private CategoryResponseDTO categoria;
 }
