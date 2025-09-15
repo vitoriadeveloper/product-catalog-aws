@@ -3,7 +3,7 @@ package com.vitoriadeveloper.catolog_api.services;
 import com.vitoriadeveloper.catolog_api.domain.Category;
 import com.vitoriadeveloper.catolog_api.domain.Product;
 import com.vitoriadeveloper.catolog_api.domain.exceptions.CategoryNotFoundException;
-import com.vitoriadeveloper.catolog_api.dto.AwsMessageDTO;
+import com.vitoriadeveloper.catolog_api.dto.AwsMessageProductDTO;
 import com.vitoriadeveloper.catolog_api.dto.ProductRequestDTO;
 import com.vitoriadeveloper.catolog_api.mappers.ProductMapper;
 import com.vitoriadeveloper.catolog_api.repositories.CategoryRepository;
@@ -38,7 +38,7 @@ public class ProductService {
             product.setCategory(category);
         }
         Product saved = repository.save(product);
-        AwsMessageDTO message = new AwsMessageDTO(
+        AwsMessageProductDTO message = new AwsMessageProductDTO(
                 saved.getId(),
                 saved.getTitle(),
                 saved.getDescription(),
@@ -46,9 +46,7 @@ public class ProductService {
                 saved.getOwner(),
                 saved.getCategory() != null ? saved.getCategory().getId() : null
         );
-
-        awsSnsService.publish(message);
-
+        awsSnsService.publishProdct(message);
         return saved;
     }
 
@@ -65,7 +63,7 @@ public class ProductService {
                         existingProduct.setCategory(category);
                     }
                     Product updated = repository.save(existingProduct);
-                    AwsMessageDTO message = new AwsMessageDTO(
+                    AwsMessageProductDTO message = new AwsMessageProductDTO(
                             updated.getId(),
                             updated.getTitle(),
                             updated.getDescription(),
@@ -73,7 +71,7 @@ public class ProductService {
                             updated.getOwner(),
                             updated.getCategory() != null ? updated.getCategory().getId() : null
                     );
-                    awsSnsService.publish(message);
+                    awsSnsService.publishProdct(message);
                     return updated;
                 });
     }
@@ -83,6 +81,6 @@ public class ProductService {
             throw new CategoryNotFoundException(id);
         }
         repository.deleteById(id);
-        awsSnsService.publish(new AwsMessageDTO(id, null, null, null, null, null));
+        awsSnsService.publishProdct(new AwsMessageProductDTO(id, null, null, null, null, null));
     }
 }
