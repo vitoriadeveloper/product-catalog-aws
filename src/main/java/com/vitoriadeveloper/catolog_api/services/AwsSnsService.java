@@ -2,13 +2,13 @@ package com.vitoriadeveloper.catolog_api.services;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.vitoriadeveloper.catolog_api.dto.AwsMessageDTO;
+import com.vitoriadeveloper.catolog_api.dto.AwsMessageCategoryDTO;
+import com.vitoriadeveloper.catolog_api.dto.AwsMessageProductDTO;
 
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import software.amazon.awssdk.services.sns.SnsClient;
 import software.amazon.awssdk.services.sns.model.PublishRequest;
-import software.amazon.awssdk.services.sns.model.Topic;
 
 @Service
 public class AwsSnsService {
@@ -21,7 +21,22 @@ public class AwsSnsService {
         this.catalogTopic = catalogTopic;
     }
 
-    public void publish(AwsMessageDTO messageDTO) {
+    public void publishProdct(AwsMessageProductDTO messageDTO) {
+        try {
+            String json = objectMapper.writeValueAsString(messageDTO);
+            PublishRequest request = PublishRequest.builder()
+                    .topicArn(catalogTopic)
+                    .message(json)
+                    .build();
+
+            snsClient.publish(request);
+
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException("Erro ao converter mensagem para JSON", e);
+        }
+    }
+
+    public void publishCategory(AwsMessageCategoryDTO messageDTO) {
         try {
             String json = objectMapper.writeValueAsString(messageDTO);
             PublishRequest request = PublishRequest.builder()
